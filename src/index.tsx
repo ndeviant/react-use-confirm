@@ -77,7 +77,7 @@ const useConfirmInternal = (defaultOptions: HookProps): ConfirmContextValue => {
   const promiseResolveRef = useRef<null | Function>(null)
 
   const closeConfirm = useCallback((): void => {
-    setOptions({ ...defaultOptions, open: false })
+    setOptions((o) => ({ ...o, open: false }))
 
     promiseResolveRef.current?.()
   }, [defaultOptions])
