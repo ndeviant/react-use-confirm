@@ -1,22 +1,44 @@
 import React, { useState } from 'react'
-
 import { useConfirm } from 'react-use-confrim'
-import 'react-use-confrim/dist/index.css'
+
+import MuiDialogConfirm from './MuiDialogConfirm'
 
 const App = () => {
-  const { openConfirm } = useConfirm();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { openConfirm } = useConfirm()
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   return (
     <>
-      <button onClick={async () => {
-        setIsSubmitting(true);
+      <button
+        onClick={async () => {
+          setIsSubmitting(true)
 
-        await openConfirm();
+          await openConfirm()
 
-        setIsSubmitting(false);
-      }}>
+          setIsSubmitting(false)
+        }}
+      >
         {isSubmitting ? 'Waiting for decision' : 'Open confirm'}
+      </button>
+
+      <button
+        onClick={async () => {
+          setIsSubmitting(true)
+
+          await openConfirm({
+            ConfirmComponent: MuiDialogConfirm,
+            title: 'This is MUI confirm',
+            content: (
+              <>
+                <p>Wow, so amazing!</p>
+              </>
+            )
+          })
+
+          setIsSubmitting(false)
+        }}
+      >
+        {isSubmitting ? 'Waiting for decision' : 'Open MUI confirm'}
       </button>
     </>
   )

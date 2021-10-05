@@ -13,15 +13,45 @@ npm install --save react-use-confrim
 ## Usage
 
 ```tsx
-import React, { Component } from 'react'
+import { ConfirmProvider } from 'react-use-confrim';
+// You can check how to implement you own component here:
+// https://github.com/ndeviant/react-use-confirm/blob/master/src/PoorConfirm.jsx
+import YourCustomConfirmComponent from './YourCustomConfirmComponent';
 
-import MyComponent from 'react-use-confrim'
-import 'react-use-confrim/dist/index.css'
+function App() {
+  return (
+    <ConfirmProvider
+      ConfirmComponent={YourCustomConfirmComponent}
+      anyDefaultProp="couldBeRewrited"
+      byOpenConfirmFunction
+      variant="success"
+    >
+      {children}
+    </ConfirmProvider>
+)
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+```
+
+```tsx
+import React from 'react'
+
+import { useConfirm } from 'react-use-confrim';
+
+function Example {
+  const { openConfirm, closeConfirm } = useConfirm();
+
+  return (
+    <button onClick={async () => {
+        await openConfirm({
+          title: 'Are you sure?',
+          actions: <button onClick={closeConfirm}>Ok</button>
+        });
+
+        alert('I will be called only after closing of confirm!')
+      }}
+    >
+      Open confirm
+    </button>)
 }
 ```
 

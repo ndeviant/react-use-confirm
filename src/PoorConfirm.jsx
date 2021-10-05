@@ -16,7 +16,7 @@ const PoorConfirm = memo(function PoorConfirm({
     open,
     title = 'Are you sure?',
     content = 'Some additional questions',
-    action = (
+    actions = (
       <React.Fragment>
         <button
           type='button'
@@ -112,7 +112,7 @@ const PoorConfirm = memo(function PoorConfirm({
           {title}
         </h4>
         <p style={{ fontFamily: 'inherit' }}>{content}</p>
-        <div style={{ marginTop: '1rem' }}>{action}</div>
+        <div style={{ marginTop: '1rem' }}>{actions}</div>
       </div>
     </div>
   )
