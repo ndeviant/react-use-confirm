@@ -1,5 +1,5 @@
 {
-  "name": "react-use-confrim-example",
+  "name": "react-use-confirm-example",
   "homepage": ".",
   "version": "0.0.0",
   "private": true,
@@ -21,7 +21,7 @@
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
     "react-scripts": "file:../node_modules/react-scripts",
-    "react-use-confrim": "file:..",
+    "react-use-confirm": "file:..",
     "typescript": "file:../node_modules/typescript"
   },
   "devDependencies": {

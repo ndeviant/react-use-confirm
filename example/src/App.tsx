@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useConfirm } from 'react-use-confrim'
+import { useConfirm } from 'react-use-confirm'
 import {
   Box,
   Button,

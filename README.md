@@ -1,19 +1,19 @@
-# react-use-confrim
+# react-use-confirm
 
 > Made with create-react-library
 
-[![NPM](https://img.shields.io/npm/v/react-use-confrim.svg)](https://www.npmjs.com/package/react-use-confrim) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-use-confirm.svg)](https://www.npmjs.com/package/react-use-confirm) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
-npm install --save react-use-confrim
+npm install --save react-use-confirm
 ```
 
 ## Usage
 
 ```tsx
-import { ConfirmProvider } from 'react-use-confrim';
+import { ConfirmProvider } from 'react-use-confirm';
 // You can check how to implement you own component here:
 // https://github.com/ndeviant/react-use-confirm/blob/master/example/src/PoorConfirm.jsx
 // Or how to use with MUI:
@@ -37,7 +37,7 @@ function App() {
 ```tsx
 import React from 'react'
 
-import { useConfirm } from 'react-use-confrim';
+import { useConfirm } from 'react-use-confirm';
 
 function Example {
   const { openConfirm, closeConfirm } = useConfirm();

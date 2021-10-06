@@ -1,10 +1,10 @@
 {
-  "name": "react-use-confrim",
-  "version": "1.0.3",
+  "name": "react-use-confirm",
+  "version": "0.0.1",
   "description": "Made with create-react-library",
   "author": "ndeviant",
   "license": "MIT",
-  "repository": "ndeviant/react-use-confrim",
+  "repository": "ndeviant/react-use-confirm",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",
