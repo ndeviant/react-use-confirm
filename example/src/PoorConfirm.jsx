@@ -21,8 +21,8 @@ const PoorConfirm = memo(function PoorConfirm({
         <button
           type='button'
           onClick={() => {
-            window.alert('Yay')
             closeConfirm()
+            window.alert('Yay')
           }}
           style={buttonStyles}
         >
@@ -30,7 +30,9 @@ const PoorConfirm = memo(function PoorConfirm({
         </button>
         <button
           type='button'
-          onClick={closeConfirm}
+          onClick={() => {
+            closeConfirm(new Error('Declined'))
+          }}
           style={{
             ...buttonStyles,
             marginLeft: '0.5rem'
@@ -77,41 +79,8 @@ const PoorConfirm = memo(function PoorConfirm({
           fontFamily: 'Arial, sans-serif'
         }}
       >
-        <span
-          tabIndex={0}
-          onClick={closeConfirm}
-          role='button'
-          style={{
-            position: 'absolute',
-            top: '0.25rem',
-            right: '0.25rem',
-            background: 'tomato',
-            borderRadius: '100rem',
-            width: '1.5rem',
-            height: '1.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            fontSize: '1.5rem',
-            fontFamily: 'inherit'
-          }}
-        >
-          &times;
-        </span>
-
-        <h4
-          style={{
-            paddingRight: '20px',
-            fontWeight: 'bold',
-            fontSize: '1.5rem',
-            marginBottom: '0.5rem',
-            fontFamily: 'inherit'
-          }}
-        >
-          {title}
-        </h4>
-        <p style={{ fontFamily: 'inherit' }}>{content}</p>
+        <h4>{title}</h4>
+        <p>{content}</p>
         <div style={{ marginTop: '1rem' }}>{actions}</div>
       </div>
     </div>

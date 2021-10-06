@@ -7,12 +7,9 @@ import React, {
   useRef
 } from 'react'
 
-// @ts-ignore
-import PoorConfirm from './PoorConfirm.jsx'
-
 interface ProviderProps {
   children: React.ReactNode
-  ConfirmComponent?: React.ComponentType<any>
+  ConfirmComponent: React.ComponentType<any>
 }
 
 type HookProps = {
@@ -48,7 +45,7 @@ export const ConfirmProvider = memo(function ConfirmProvider(
   const value = useConfirmInternal(providerDefaultOptions)
 
   const ConfirmComponent =
-    value.options.ConfirmComponent || ConfirmComponentProp || PoorConfirm
+    value.options.ConfirmComponent || ConfirmComponentProp
 
   return (
     <ConfirmContext.Provider value={value}>
@@ -74,13 +71,23 @@ const useConfirmInternal = (defaultOptions: HookProps): ConfirmContextValue => {
    * Promise hack, to be able to call openConfirm async
    * and resolve, only on close.
    */
-  const promiseResolveRef = useRef<null | Function>(null)
+  const promiseFunctionsRef = useRef<null | {
+    resolve: Function
+    reject: Function
+  }>(null)
 
-  const closeConfirm = useCallback((): void => {
-    setOptions((o) => ({ ...o, open: false }))
+  const closeConfirm = useCallback(
+    (error): void => {
+      setOptions((o) => ({ ...o, open: false }))
 
-    promiseResolveRef.current?.()
-  }, [defaultOptions])
+      if (error) {
+        promiseFunctionsRef.current?.reject?.(error)
+      } else {
+        promiseFunctionsRef.current?.resolve?.()
+      }
+    },
+    [defaultOptions]
+  )
 
   const openConfirm = useCallback(
     async (arg): Promise<void> => {
@@ -94,9 +101,9 @@ const useConfirmInternal = (defaultOptions: HookProps): ConfirmContextValue => {
       })
 
       // Resolve previous promise, before creating new one
-      promiseResolveRef.current?.()
-      const promise = new Promise((resolve) => {
-        promiseResolveRef.current = resolve
+      promiseFunctionsRef.current?.resolve?.()
+      const promise = new Promise((resolve, reject) => {
+        promiseFunctionsRef.current = { resolve, reject }
       })
 
       // Wait until closeConfirm is called

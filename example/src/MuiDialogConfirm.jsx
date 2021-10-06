@@ -5,7 +5,7 @@ import { Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mate
 const ConfirmDialog = memo(function ConfirmDialog({
   closeConfirm,
   options: {
-    action = <Button onClick={closeConfirm}>Ok</Button>,
+    actions = <Button onClick={closeConfirm}>Ok</Button>,
     open,
     title,
     content,
@@ -21,7 +21,7 @@ const ConfirmDialog = memo(function ConfirmDialog({
     >
       {title && <DialogTitle>{title}</DialogTitle>}
       {content && <DialogContent>{content}</DialogContent>}
-      {action && <DialogActions>{action}</DialogActions>}
+      {actions && <DialogActions>{actions}</DialogActions>}
     </Dialog>
   );
 });

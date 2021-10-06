@@ -1,5 +1,12 @@
 import React, { useState } from 'react'
 import { useConfirm } from 'react-use-confrim'
+import {
+  Box,
+  Button,
+  Container,
+  CssBaseline,
+  Typography
+} from '@material-ui/core'
 
 import MuiDialogConfirm from './MuiDialogConfirm'
 
@@ -8,39 +15,76 @@ const App = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   return (
-    <>
-      <button
-        onClick={async () => {
-          setIsSubmitting(true)
-
-          await openConfirm()
-
-          setIsSubmitting(false)
-        }}
+    <Container>
+      <CssBaseline></CssBaseline>
+      <Box
+        display='flex'
+        alignItems='center'
+        justifyContent='center'
+        height='100vh'
       >
-        {isSubmitting ? 'Waiting for decision' : 'Open confirm'}
-      </button>
+        <Button
+          variant='outlined'
+          onClick={async () => {
+            setIsSubmitting(true)
 
-      <button
-        onClick={async () => {
-          setIsSubmitting(true)
+            try {
+              await openConfirm()
+            } catch (error) {
+              console.log(
+                'We can catch custom errors from "closeConfirm" if needed.'
+              )
+              console.log(error.message)
+            }
 
-          await openConfirm({
-            ConfirmComponent: MuiDialogConfirm,
-            title: 'This is MUI confirm',
-            content: (
-              <>
-                <p>Wow, so amazing!</p>
-              </>
-            )
-          })
+            setIsSubmitting(false)
+          }}
+        >
+          {isSubmitting ? 'Waiting for decision' : 'Open confirm'}
+        </Button>
 
-          setIsSubmitting(false)
-        }}
-      >
-        {isSubmitting ? 'Waiting for decision' : 'Open MUI confirm'}
-      </button>
-    </>
+        <Button
+          variant='outlined'
+          onClick={async () => {
+            setIsSubmitting(true)
+
+            await openConfirm((closeConfirm: Function) => ({
+              ConfirmComponent: MuiDialogConfirm,
+              title: 'This is MUI confirm',
+              content: (
+                <>
+                  <Typography>Wow, so amazing!</Typography>
+                </>
+              ),
+              actions: (
+                <>
+                  <Button
+                    onClick={() => {
+                      closeConfirm()
+                    }}
+                  >
+                    No
+                  </Button>
+                  <Button
+                    variant='contained'
+                    color='secondary'
+                    onClick={() => {
+                      closeConfirm()
+                    }}
+                  >
+                    Yes, indeed
+                  </Button>
+                </>
+              )
+            }))
+
+            setIsSubmitting(false)
+          }}
+        >
+          {isSubmitting ? 'Waiting for decision' : 'Open MUI confirm'}
+        </Button>
+      </Box>
+    </Container>
   )
 }
 

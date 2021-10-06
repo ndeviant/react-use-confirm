@@ -15,7 +15,7 @@ npm install --save react-use-confrim
 ```tsx
 import { ConfirmProvider } from 'react-use-confrim';
 // You can check how to implement you own component here:
-// https://github.com/ndeviant/react-use-confirm/blob/master/src/PoorConfirm.jsx
+// https://github.com/ndeviant/react-use-confirm/blob/master/example/src/PoorConfirm.jsx
 // Or how to use with MUI:
 // https://github.com/ndeviant/react-use-confirm/blob/master/example/src/MuiDialogConfirm.jsx
 import YourCustomConfirmComponent from './YourCustomConfirmComponent';
